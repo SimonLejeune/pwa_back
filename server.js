@@ -1,6 +1,6 @@
 const express = require('express');
-var cors = require('cors')
 const app = express();
+
 const webpush = require('web-push');
 
 const vapidKeys = {
@@ -17,7 +17,6 @@ webpush.setVapidDetails(
 var bodyParser = require('body-parser');
 app.use(bodyParser.json()); // support json encoded bodies
 app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
-app.use(cors())
 
 const greet = express.Router();
 greet.get('/', (req, res) => {
@@ -28,18 +27,6 @@ app.use('/greet', greet);
 
 app.post('/subscribe', function(req, res) {
  console.log(req.body);
-
- res.send(req.body);
-});
-
-app.route('/api/newsletter').post(sendNewsletter);
-
-function sendNewsletter(req, res) {
-
-// const allSubscriptions = ... get subscriptions from database
-
-//console.log('Total subscriptions', allSubscriptions.length);
-
  const notificationPayload = {
   "notification": {
    "title": "Angular News",
@@ -56,15 +43,9 @@ function sendNewsletter(req, res) {
    }]
   }
  };
-
- Promise.all(allSubscriptions.map(sub => webpush.sendNotification(
-     sub, JSON.stringify(notificationPayload) )))
-     .then(() => res.status(200).json({message: 'Newsletter sent successfully.'}))
-     .catch(err => {
-      console.error("Error sending notification, reason: ", err);
-      res.sendStatus(500);
-     });
-}
+ webpush.sendNotification(req.body, JSON.stringify(notificationPayload) );
+ res.send(req.body);
+});
 
 const port = process.env.PORT || 80;
 
