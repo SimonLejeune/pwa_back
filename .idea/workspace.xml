@@ -3,8 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="4ce3cf4a-87bd-4b73-9a07-15158da81362" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server.js" beforeDir="false" afterPath="$PROJECT_DIR$/server.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -23,6 +21,7 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="com.intellij.ide.scratch.LRUPopupBuilder$1/New Scratch File" value="TEXT" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
@@ -40,11 +39,17 @@
       <option name="presentableId" value="Default" />
       <updated>1602165503364</updated>
       <workItem from="1602165504444" duration="4589000" />
-      <workItem from="1602228702775" duration="4438000" />
+      <workItem from="1602228702775" duration="4677000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="575" y="334" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1602244982829">
+      <screen x="0" y="0" width="1680" height="1050" />
+    </state>
+    <state x="575" y="334" key="#com.intellij.fileTypes.FileTypeChooser/-1920.0.1920.1080/0.0.1680.1050@0.0.1680.1050" timestamp="1602244982829" />
   </component>
 </project>
