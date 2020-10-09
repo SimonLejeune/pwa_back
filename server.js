@@ -10,11 +10,19 @@ const jwt = require('express-jwt');
 const jwtAuthz = require('express-jwt-authz');
 const jwksRsa = require('jwks-rsa');
 
+require('dotenv').config();
+
+if (!process.env.AUTH0_DOMAIN || !process.env.AUTH0_AUDIENCE) {
+    throw 'Make sure you have AUTH0_DOMAIN, and AUTH0_AUDIENCE in your .env file';
+}
+
 var cors = require('cors');
 
-app.use(cors({
+const corsOptions = {
     origin: ["https://ngseo.netlify.app", "http://localhost:4200"]
-}));
+};
+
+app.use(cors(corsOptions));
 
 const vapidKeys = {
     "publicKey":"BCNVbiY2W4wbKEIEoA7ChkmtKWUB5M4NQ-dN4M1acfFJSPEB2gJpNYbb0AnXT2--pcrGDOOclKh3z6si76qfpto",
@@ -89,12 +97,6 @@ app.get('/private', checkJwt, function(req, res) {
         message: 'Hello from a private endpoint! You need to be authenticated to see this.'
     });
 });
-
-require('dotenv').config();
-
-if (!process.env.AUTH0_DOMAIN || !process.env.AUTH0_AUDIENCE) {
-    throw 'Make sure you have AUTH0_DOMAIN, and AUTH0_AUDIENCE in your .env file';
-}
 
 const port = process.env.PORT || 80;
 
