@@ -9,7 +9,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 var cors = require('cors');
 
 app.use(cors({
-    origin: "https://ngseo.netlify.app"
+    origin: ["https://ngseo.netlify.app", "http://localhost:4200"]
 }));
 
 const vapidKeys = {
