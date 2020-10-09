@@ -25,6 +25,11 @@ webpush.setVapidDetails(
 
 
 const subscribe = express.Router();
+const ping = express.Router();
+ping.get('/', (req, res) => {
+    console.log(req.baseUrl);
+    res.send('ping')
+})
 subscribe.post('/', (req, res) => {
     const subscription = req.body;
     const payload = JSON.stringify({
@@ -54,6 +59,7 @@ subscribe.post('/', (req, res) => {
 })
 
 app.use('/subscribe', subscribe);
+app.use('/ping', ping);
 
 const port = process.env.PORT || 80;
 
