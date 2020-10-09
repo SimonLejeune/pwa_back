@@ -34,6 +34,15 @@ ping.get('/', (req, res) => {
     console.log(req.baseUrl);
     const json = JSON.stringify({
         "notification": {
+            "title": "ping"
+        }
+    });
+    res.send(json);
+})
+subscribe.post('/', (req, res) => {
+    const subscription = req.body;
+    const payload = JSON.stringify({
+        "notification": {
             "title": "Angular News",
             "body": "Newsletter Available!",
             "icon": "assets/main-page-logo-small-hat.png",
@@ -48,15 +57,6 @@ ping.get('/', (req, res) => {
             }]
         }
     });
-    res.send(json);
-})
-subscribe.post('/', (req, res) => {
-    const subscription = req.body;
-    const payload = JSON.stringify({
-        "notification": {
-            "title" : "ping"
-    }
-});
     console.log(subscription);
     webpush.sendNotification(subscription, payload).then(result => {
         console.log("then");
