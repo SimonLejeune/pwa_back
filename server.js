@@ -45,12 +45,12 @@ subscribe.post('/', (req, res) => {
 });
     console.log(subscription);
     webpush.sendNotification(subscription, payload).then(result => {
+        console.log("then");
         console.log(result);
-        res.send(result);
     }).catch(error => {
-      res.send(error.stack);
+        console.log("catch");
+        console.log(error);
     });
-    res.send(payload);
 })
 
 app.use('/subscribe', subscribe);
