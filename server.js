@@ -105,7 +105,7 @@ weather.get('/', (req, res) => {
     let lat = data["lat"];
     let lon = data["lon"];
 
-    let apiCallUrl = "https://api.openweathermap.org/data/2.5/weather?lat=" + lat + "&lon=" + lon + "&cnt=7&appid=" + apiKey;
+    let apiCallUrl = "https://api.openweathermap.org/data/2.5/weather?units=metric&lat=" + lat + "&lon=" + lon + "&cnt=7&appid=" + apiKey;
 
     let request = new XMLHttpRequest();
     request.open("GET", apiCallUrl, false);
