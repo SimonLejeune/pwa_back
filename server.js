@@ -9,6 +9,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 const jwt = require('express-jwt');
 const jwtAuthz = require('express-jwt-authz');
 const jwksRsa = require('jwks-rsa');
+const XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
 
 require('dotenv').config();
 
@@ -17,6 +18,7 @@ if (!process.env.AUTH0_DOMAIN || !process.env.AUTH0_AUDIENCE) {
 }
 
 var cors = require('cors');
+const { request } = require('express');
 
 const corsOptions = {
     origin: ["https://ngseo.netlify.app", "http://localhost:4200"]
@@ -50,7 +52,6 @@ const checkJwt = jwt({
     algorithms: ['RS256']
 });
 
-const subscribe = express.Router();
 const ping = express.Router();
 ping.get('/', checkJwt, (req, res) => {
     console.log(req.baseUrl);
@@ -61,6 +62,8 @@ ping.get('/', checkJwt, (req, res) => {
     });
     res.send(json);
 })
+
+const subscribe = express.Router();
 subscribe.post('/', (req, res) => {
     const subscription = req.body;
     const payload = JSON.stringify({
@@ -89,8 +92,37 @@ subscribe.post('/', (req, res) => {
     });
 })
 
+const weather = express.Router();
+// weather.get('/', checkJwt, (req, res) => {
+weather.get('/', (req, res) => {
+    console.log(req.baseUrl);
+    
+    let json = {};
+    const apiKey = process.env.WEATHER_KEY;
+
+    let data = req.query;
+
+    let lat = data["lat"];
+    let lon = data["lon"];
+
+    let apiCallUrl = "https://api.openweathermap.org/data/2.5/weather?lat=" + lat + "&lon=" + lon + "&cnt=7&appid=" + apiKey;
+
+    let request = new XMLHttpRequest();
+    request.open("GET", apiCallUrl, false);
+    request.send();
+
+    if (request.status == 200)
+        json = JSON.parse(request.responseText);
+    else
+        json = {error: "Request Failed"};
+
+    res.status(request.status).send(json);
+})
+
 app.use('/subscribe', subscribe);
 app.use('/ping', ping);
+app.use('/weather', weather);
+
 app.get('/private', checkJwt, function(req, res) {
     res.json({
         message: 'Hello from a private endpoint! You need to be authenticated to see this.'
