@@ -18,7 +18,6 @@ if (!process.env.AUTH0_DOMAIN || !process.env.AUTH0_AUDIENCE) {
 }
 
 var cors = require('cors');
-const { request } = require('express');
 
 const corsOptions = {
     origin: ["https://ngseo.netlify.app", "http://localhost:4200"]
@@ -83,13 +82,16 @@ subscribe.post('/', (req, res) => {
         }
     });
     console.log(subscription);
-    webpush.sendNotification(subscription, payload).then(result => {
+    let pushRes = webpush.sendNotification(subscription, payload).then(result => {
         console.log("then");
         console.log(result);
+        return result;
     }).catch(error => {
         console.log("catch");
         console.log(error);
+        return error;
     });
+    res.status(202).send(pushRes);
 })
 
 const weather = express.Router();
