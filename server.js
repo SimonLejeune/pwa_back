@@ -68,8 +68,8 @@ subscribe.post('/', (req, res) => {
     const payload = JSON.stringify({
         "notification": {
             "title": "Angular News",
-            "body": "Newsletter Available!",
-            "icon": "assets/main-page-logo-small-hat.png",
+            "body": "Check out today's weather while you grab a coffee!",
+            "icon": "assets/icon-72x72.png",
             "vibrate": [100, 50, 100],
             "data": {
                 "dateOfArrival": Date.now(),
