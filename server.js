@@ -96,7 +96,7 @@ subscribe.post('/', (req, res) => {
 
 const weather = express.Router();
 // weather.get('/', checkJwt, (req, res) => {
-weather.get('/', (req, res) => {
+weather.get('/', checkJwt, (req, res) => {
     console.log(req.baseUrl);
     
     let json = {};
